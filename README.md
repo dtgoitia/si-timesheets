@@ -28,9 +28,9 @@ Bear in mind this script is written in [_Python 3_](https://www.python.org/downl
     ```
 2. From a bash terminal, navigate to the cloned repo directory and run the following to install dependencies:
 ```bash
-pip install openpyxl
+pip install openpyxl python-dotenv
 ```
-3. Create a `.env` file in the  root:
+3. Create a file called `.env` in the repository root directory:
 ```bash
 touch .env
 ```
