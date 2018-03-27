@@ -12,11 +12,25 @@ This python script does:
 Bear in mind this script is written in [_Python 3_](https://www.python.org/downloads/).
 
 1. Clone this repo.
-2. From a terminal, navigate to the repo directory and install dependencies:
+2. Ensure _Python_ and _pip_ are correctly installed by running:
+    * _Python_:
+    ```bash
+    python --version
+    ```
+    * _pip_:
+    ```bash
+    pip --version
+    ```
+    If you don't get the version back, add _Python_ and _pip_ to your `PATH` environment variable. Default directories are:
+    ```bash
+    %userprofile%\AppData\Local\Programs\Python\Python36-32\
+    %userprofile%\AppData\Local\Programs\Python\Python36-32\Scripts\
+    ```
+2. From a bash terminal, navigate to the cloned repo directory and run the following to install dependencies:
 ```bash
-pip install openpyxl ntpath smtplib
+pip install openpyxl
 ```
-3. Create a `.env` file:
+3. Create a `.env` file in the  root:
 ```bash
 touch .env
 ```
