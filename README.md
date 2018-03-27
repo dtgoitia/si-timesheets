@@ -9,7 +9,7 @@ This python script does:
 
 ## Setup
 
-Bear in mind this script is written in _Python 3_.
+Bear in mind this script is written in [_Python 3_](https://www.python.org/downloads/).
 
 1. Clone this repo.
 2. From a terminal, navigate to the repo directory and install dependencies:
