@@ -1,40 +1,17 @@
 ## What does it do?
 
-This python script does:
+This executable does:
 1. open a template time sheet
 2. update the details to match your name and date
 3. save a copy of the time sheet with the updated details.
 4. attach the updated time sheet to an email and send it
 
 
-## Setup
+## Quick start
 
-Bear in mind this script is written in [_Python 3_](https://www.python.org/downloads/).
-
-1. Clone this repo.
-2. Ensure _Python_ and _pip_ are correctly installed by running:
-    * _Python_:
-    ```bash
-    python --version
-    ```
-    * _pip_:
-    ```bash
-    pip --version
-    ```
-    If you don't get the version back, add _Python_ and _pip_ to your `PATH` environment variable. Default directories are:
-    ```bash
-    %userprofile%\AppData\Local\Programs\Python\Python36-32\
-    %userprofile%\AppData\Local\Programs\Python\Python36-32\Scripts\
-    ```
-2. From a bash terminal, navigate to the cloned repo directory and run the following to install dependencies:
-```bash
-pip install openpyxl python-dotenv
-```
-3. Create a file called `.config` in the repository root directory:
-```bash
-touch .config
-```
-4. Set up your details in the `.config` file:
+1. Clone [this](https://github.com/dtgoitia/si-timesheets) repo.
+2. Create a file called `.config` in the repository root directory.
+3. Set up your details in the `.config` file:
 ```json
 {
   "employee_name": "The-Best-Employee",
@@ -47,10 +24,7 @@ touch .config
   "delete_temp": "True"
 }
 ```
-5. Run the script:
-```bash
-python timesheet.py
-```
+4. Run `timesheet.exe`.
 
 ## Configuration file (`.config`)
 
