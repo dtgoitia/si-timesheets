@@ -22,8 +22,8 @@ def send_mail(econf, subject, message, recipient, filePath):
     part = MIMEBase('application', "octet-stream")
     part.set_payload(open(filePath, "rb").read())
     encoders.encode_base64(part)
-    # TODO take filename out
-    part.add_header('Content-Disposition', 'attachment; filename="david-torralba-goitia-20180330.xlsx"')
+    attachment = 'attachment; filename="' + ntpath.basename(filePath)
+    part.add_header('Content-Disposition', attachment)
     msg.attach(part)
 
     try:
@@ -42,7 +42,7 @@ def send_mail(econf, subject, message, recipient, filePath):
     except error as e:
         print(str(e))
     
-    deleteTempFiles(os.environ.get('DELETE_TEMP'), newFile)
+    deleteTempFiles(os.environ.get('DELETE_TEMP'), filePath)
 
 def deleteTempFiles(doit: str, tmp_file_path: str):
   if (doit == 'False') or (doit == 'false') :
@@ -89,8 +89,8 @@ sheet['B3'].value = os.environ.get('EMPLOYEE_NAME')
 sheet['B4'].value = lastFriday.strftime("%d/%m/%Y")
 
 # save as new file
-newFile = newFilePath(templateFilePath)
-wb.save(newFile)
+new_file_path = newFilePath(templateFilePath)
+wb.save(new_file_path)
 
 print('Spreadsheet succesfully created')
 
@@ -99,4 +99,4 @@ class EmailConfig:
     self.username = os.environ.get("MICROSOFT_ACCOUNT_EMAIL")
     self.password = os.environ.get("MICROSOFT_ACCOUNT_PASS")
 
-send_mail(EmailConfig(), os.environ.get("EMAIL_SUBJECT"),  os.environ.get("EMAIL_BODY"), os.environ.get("EMAIL_TO"), newFile)
+send_mail(EmailConfig(), os.environ.get("EMAIL_SUBJECT"),  os.environ.get("EMAIL_BODY"), os.environ.get("EMAIL_TO"), new_file_path)
