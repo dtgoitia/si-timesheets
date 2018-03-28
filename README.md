@@ -7,6 +7,8 @@ This python script does:
 4. attach the updated time sheet to an email and send it
 
 
+## How to use it
+
 ## Setup
 
 Bear in mind this script is written in [_Python 3_](https://www.python.org/downloads/).

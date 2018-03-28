@@ -3,14 +3,14 @@
 block_cipher = None
 
 
-a = Analysis(['timesheet.py'],
+a = Analysis(['src\\timesheet.py'],
              pathex=['C:\\Users\\david-torralba-goiti\\projects\\si-timesheets'],
              binaries=[],
              datas=[],
              hiddenimports=[],
              hookspath=[],
              runtime_hooks=[],
-             excludes=[],
+             excludes=[ 'matplotlib', 'qt5', 'sqlite3', 'numpy', 'pydoc' ],
              win_no_prefer_redirects=False,
              win_private_assemblies=False,
              cipher=block_cipher)
