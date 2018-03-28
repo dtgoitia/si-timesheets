@@ -8,9 +8,9 @@ from email.mime.text import MIMEText
 from email.mime.base import MIMEBase
 from email import encoders
 from os.path import join, dirname
-from dotenv import load_dotenv
-dotenv_path = join(dirname(__file__), '.env')
-load_dotenv(dotenv_path)
+import json
+with open('.config') as fd:
+    config=json.load(fd)
 
 def send_mail(econf, subject, message, recipient, filePath):
     msg = MIMEMultipart()
@@ -42,7 +42,7 @@ def send_mail(econf, subject, message, recipient, filePath):
     except error as e:
         print(str(e))
     
-    deleteTempFiles(os.environ.get('DELETE_TEMP'), filePath)
+    deleteTempFiles(os.environ.get('delete_temp'), filePath)
 
 def deleteTempFiles(doit: str, tmp_file_path: str):
   if (doit == 'False') or (doit == 'false') :
@@ -71,11 +71,11 @@ def newFilePath(templateFilePath: str):
   filePathNoExtension, fileExtension = os.path.splitext(templateFilePath)
   oldBase = ntpath.basename(filePathNoExtension)
   fileDir = ntpath.dirname(filePathNoExtension)
-  newBase = newFileName(os.environ.get("EMPLOYEE_NAME"), lastFriday)
+  newBase = newFileName(config["employee_name"], lastFriday)
   return os.path.join(fileDir, newBase + fileExtension)
 
 # templateFilePath = "C:/Users/david-torralba-goiti/Desktop/template-time-sheet.xlsx"
-templateFilePath = os.environ.get("XLSX_TEMPLATE_PATH")
+templateFilePath = config["xlsx_template_path"]
 lastFriday = previousFriday(datetime.date.today())
 
 # open template spreadsheet
@@ -83,7 +83,7 @@ wb = openpyxl.load_workbook(templateFilePath)
 sheet = wb['Sheet1']
 
 # update timesheet employee
-sheet['B3'].value = os.environ.get('EMPLOYEE_NAME')
+sheet['B3'].value = os.environ.get('employee_name')
 
 # update timesheet date
 sheet['B4'].value = lastFriday.strftime("%d/%m/%Y")
@@ -96,7 +96,7 @@ print('Spreadsheet succesfully created')
 
 class EmailConfig:
   def __init__(self):
-    self.username = os.environ.get("MICROSOFT_ACCOUNT_EMAIL")
-    self.password = os.environ.get("MICROSOFT_ACCOUNT_PASS")
+    self.username = config["microsoft_account_email"]
+    self.password = config["microsoft_account_pass"]
 
-send_mail(EmailConfig(), os.environ.get("EMAIL_SUBJECT"),  os.environ.get("EMAIL_BODY"), os.environ.get("EMAIL_TO"), new_file_path)
+send_mail(EmailConfig(), config["email_subject"],  config["email_body"], config["email_to"], new_file_path)

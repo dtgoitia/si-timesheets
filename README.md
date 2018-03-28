@@ -30,37 +30,38 @@ Bear in mind this script is written in [_Python 3_](https://www.python.org/downl
 ```bash
 pip install openpyxl python-dotenv
 ```
-3. Create a file called `.env` in the repository root directory:
+3. Create a file called `.config` in the repository root directory:
 ```bash
-touch .env
+touch .config
 ```
-4. Set up your details in the `.env` file:
-```env
-EMPLOYEE_NAME=The-Best-Employee
-MICROSOFT_ACCOUNT_EMAIL=TYPE_HERE_YOUR_MICROSOFT_ACCOUNT_EMAIL
-MICROSOFT_ACCOUNT_PASS=TYPE_HERE_YOUR_MICROSOFT_ACCOUNT_PASSWORD
-EMAIL_TO=johndoe@example.com
-EMAIL_SUBJECT=Weekly time recording
-EMAIL_BODY=Hi Joe! Here my records :)
-XLSX_TEMPLATE_PATH=C:/Users/The-Best-Employee/template-time-sheet.xlsx
-DELETE_TEMP=True
+4. Set up your details in the `.config` file:
+```json
+{
+  "employee_name": "The-Best-Employee",
+  "microsoft_account_email": "TYPE_HERE_YOUR_MICROSOFT_ACCOUNT_EMAIL",
+  "microsoft_account_pass": "TYPE_HERE_YOUR_MICROSOFT_ACCOUNT_PASSWORD",
+  "email_to": "johndoe@example.com",
+  "email_subject": "Weekly time recording",
+  "email_body": "Hi Joe! Here my records :)",
+  "xlsx_template_path": "C:/Users/The-Best-Employee/template-time-sheet.xlsx",
+  "delete_temp": "True"
+}
 ```
 5. Run the script:
 ```bash
 python timesheet.py
 ```
 
-## Configuration file (`.env`)
+## Configuration file (`.config`)
 
-
-* `EMPLOYEE_NAME`: your name as shown in the time sheet template.
-* `MICROSOFT_ACCOUNT_EMAIL`: your Microsoft Account email.
-* `MICROSOFT_ACCOUNT_PASS`: your Microsoft Account password.
-* `EMAIL_TO`: person to receive your email.
-* `EMAIL_SUBJECT`: email subject.
-* `EMAIL_BODY`: **single line** email body. HTML support on the way.
-* `XLSX_TEMPLATE_PATH`: absolute path to the time sheet template.
-* `DELETE_TEMP`: set this value to `False` to remove temporary files. Otherwise, any temporary files will be deleted.
+* `employee_name`: your name as shown in the time sheet template.
+* `microsoft_account_email`: your Microsoft Account email.
+* `microsoft_account_pass`: your Microsoft Account password.
+* `email_to`: person to receive your email.
+* `email_subject`: email subject.
+* `email_body`: **single line** email body. HTML support on the way.
+* `xlsx_template_path`: absolute path to the time sheet template.
+* `delete_temp`: set this value to `False` to remove temporary files. Otherwise, any temporary files will be deleted.
 
 This file will only be locally for safety. **DO NEVER** make it public or commit it (it's listed under `.gitignore` on purpose).
 

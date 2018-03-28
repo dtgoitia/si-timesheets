@@ -1,3 +1,5 @@
 .vscode
-.env
+.config
 __pycache__
+dist
+build
