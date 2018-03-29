@@ -80,11 +80,12 @@ lastFriday = previousFriday(datetime.date.today())
 # open template spreadsheet
 wb = openpyxl.load_workbook(templateFilePath)
 sheet = wb['Sheet1']
+employee_name = os.environ.get("employee_name")
 
-# update timesheet employee
-sheet['B3'].value = os.environ.get('employee_name')
+# update timesheet: employee
+sheet['B3'].value = config["employee_name"]
 
-# update timesheet date
+# update timesheet: date
 sheet['B4'].value = lastFriday.strftime("%d/%m/%Y")
 
 # save as new file
