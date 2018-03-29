@@ -42,4 +42,4 @@ This file will only be locally for safety. **DO NEVER** make it public or commit
 ## TODO
 
 - [ ] Support HTML in the email body.
-- [ ] Remove unnecessary dependencies to reduce the binary size.
+- [x] Remove unnecessary dependencies to reduce the binary size.
