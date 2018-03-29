@@ -17,7 +17,7 @@ def send_mail(econf, subject, message, recipient, filePath):
     msg['From'] = econf.username
     msg['To'] = recipient
     msg['Subject'] = subject
-    msg.attach(MIMEText(message))
+    msg.attach(MIMEText(message, 'html'))
 
     part = MIMEBase('application', "octet-stream")
     part.set_payload(open(filePath, "rb").read())
