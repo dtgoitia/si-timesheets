@@ -19,7 +19,7 @@ This executable does:
   "microsoft_account_pass": "TYPE_HERE_YOUR_MICROSOFT_ACCOUNT_PASSWORD",
   "email_to": "johndoe@example.com",
   "email_subject": "Weekly time recording",
-  "email_body": "Hi Joe! Here my records :)",
+  "email_body": "<p>Hi Joe!<br>Here my records <b>:)</b></p>",
   "xlsx_template_path": "C:/Users/The-Best-Employee/template-time-sheet.xlsx",
   "delete_temp": "True"
 }
@@ -33,7 +33,7 @@ This executable does:
 * `microsoft_account_pass`: your Microsoft Account password.
 * `email_to`: person to receive your email.
 * `email_subject`: email subject.
-* `email_body`: **single line** email body. HTML support on the way.
+* `email_body`: email body, interpreted as HTML.
 * `xlsx_template_path`: absolute path to the time sheet template.
 * `delete_temp`: set this value to `False` to remove temporary files. Otherwise, any temporary files will be deleted.
 
@@ -41,5 +41,5 @@ This file will only be locally for safety. **DO NEVER** make it public or commit
 
 ## TODO
 
-- [ ] Support HTML in the email body.
-- [ ] Remove unnecessary dependencies to reduce the binary size.
+- [x] Support HTML in the email body.
+- [x] Remove unnecessary dependencies to reduce the binary size.
