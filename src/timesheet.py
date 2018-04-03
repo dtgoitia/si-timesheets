@@ -42,7 +42,7 @@ def send_mail(econf, subject, message, recipient, filePath):
     except error as e:
         print(str(e))
     
-    deleteTempFiles(os.environ.get('delete_temp'), filePath)
+    deleteTempFiles(config['delete_temp'], filePath)
 
 def deleteTempFiles(doit: str, tmp_file_path: str):
   if (doit == 'False') or (doit == 'false') :
