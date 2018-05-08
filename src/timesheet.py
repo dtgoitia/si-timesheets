@@ -27,7 +27,7 @@ def send_mail(econf, subject, message, recipient, filePath):
     msg.attach(part)
 
     try:
-        print('Sending email...')
+        print(f'Sending email to {recipient}...')
 
         mailServer = smtplib.SMTP('smtp-mail.outlook.com', 587)
         mailServer.ehlo()
@@ -39,7 +39,7 @@ def send_mail(econf, subject, message, recipient, filePath):
 
         print('Email successfully sent!')
 
-    except error as e:
+    except Exception as e:
         print(str(e))
     
     deleteTempFiles(config['delete_temp'], filePath)
