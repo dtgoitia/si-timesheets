@@ -5,11 +5,12 @@ name = "pypi"
 
 [packages]
 openpyxl = "*"
-pylint = "*"
-pyinstaller = "*"
-"flake8" = "*"
 
 [dev-packages]
+pytest = "*"
+"flake8" = "*"
+pyinstaller = "*"
+rope = "*"
 
 [requires]
 python_version = "3.6"
