@@ -2,6 +2,7 @@ import datetime
 
 
 def get_previous_friday(reference_date: datetime.datetime) -> datetime.datetime:
+    """Return Friday datetime inmediatly prior to the reference_date."""
     wd = reference_date.weekday()
     if wd == 4:
         return reference_date

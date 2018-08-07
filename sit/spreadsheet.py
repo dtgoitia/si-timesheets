@@ -5,14 +5,18 @@ from sit.friday import get_previous_friday
 import ntpath
 
 
+# TODO: add unit test
 def create_new_file_path(template_file_path: str, employee_name: str, last_friday: datetime.datetime):
+    """Generate a new file path adding the last Friday date to the template."""
     file_path_without_extension, file_extension = os.path.splitext(template_file_path)
     file_dir = ntpath.dirname(file_path_without_extension)
-    new_base = get_new_file_name(employee_name, last_friday)
+    new_base = employee_name.lower() + '-' + last_friday.strftime("%Y%m%d")
     return os.path.join(file_dir, new_base + file_extension)
 
 
+# TODO: add unit test
 def delete_temp_files(do_it: str, tmp_file_path: str):
+    """Delete temporary files."""
     if (do_it == 'False') or (do_it == 'false'):
         print('Temporary files were not deleted, as requested')
     else:
@@ -20,26 +24,26 @@ def delete_temp_files(do_it: str, tmp_file_path: str):
         os.remove(tmp_file_path)
 
 
-def get_new_file_name(employee_name: str, file_date: datetime.datetime):
-    return employee_name.lower() + '-' + file_date.strftime("%Y%m%d")
-
-
+# TODO: add unit test
 def update_spreadsheet(template_file_path: str, employee_name: str) -> str:
-    # open template spreadsheet
+    """Edit the spreadsheet and save it as a new file."""
+    # open the timesheet template spreadsheet
     wb = openpyxl.load_workbook(template_file_path)
     sheet = wb['Sheet1']
 
-    # update timesheet: employee
+    # update employee's name in the timesheet
     sheet['B3'].value = employee_name
 
-    # update timesheet: date
+    # update week date in the timesheet
     last_friday = get_previous_friday(datetime.date.today())
     sheet['B4'].value = last_friday.strftime("%d/%m/%Y")
 
-    # save as new file
+    # save timesheet as a new file
     new_file_path = create_new_file_path(template_file_path, employee_name, last_friday)
     wb.save(new_file_path)
 
+    # TODO: move this print message to a logging, which will be optionally enabled
+    # with a "verbose" flag in the command line
     print('Spreadsheet succesfully created')
 
     # TODO: ensure the new spreadsheet really exists,

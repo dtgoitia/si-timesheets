@@ -1,4 +1,3 @@
-import datetime
 from sit.load import get_config
 from sit.spreadsheet import update_spreadsheet
 from sit.mail import send_mail
@@ -9,6 +8,7 @@ CONFIG_PATH = "./.config"
 
 
 def main():
+    """Run main function (on 'sit' command)."""
     config = get_config(CONFIG_PATH)
     template_file_path = config["xlsx_template_path"]
     employee_name = config["employee_name"]
@@ -27,5 +27,6 @@ def main():
     print('main() executed till the end!')
 
 
-if __name__ == "__main__":
-    main()
+# Uncomment to debug
+# if __name__ == "__main__":
+#     main()

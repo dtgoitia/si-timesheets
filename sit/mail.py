@@ -7,7 +7,9 @@ from sit.spreadsheet import delete_temp_files
 import ntpath
 
 
-def send_mail(username: str, password: str, subject: str, message: str, recipient: str, attachment_path: str, delete_temp: str):
+def send_mail(username: str, password: str, subject: str, message: str, recipient: str, attachment_path: str,
+              delete_temp: str):
+    """Send email with attachment."""  # TODO: add unit test
     msg = MIMEMultipart()
     msg['From'] = username
     msg['To'] = recipient
