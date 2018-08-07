@@ -36,5 +36,5 @@ def send_mail(username: str, password: str, subject: str, message: str, recipien
 
     except Exception as e:
         print(str(e))
-    
+
     delete_temp_files(delete_temp, attachment_path)

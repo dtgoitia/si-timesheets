@@ -13,11 +13,11 @@ def create_new_file_path(template_file_path: str, employee_name: str, last_frida
 
 
 def delete_temp_files(do_it: str, tmp_file_path: str):
-  if (do_it == 'False') or (do_it == 'false') :
-    print('Temporary files were not deleted, as requested')
-  else:
-    print('Temporary files cleaned')
-    os.remove(tmp_file_path)
+    if (do_it == 'False') or (do_it == 'false'):
+        print('Temporary files were not deleted, as requested')
+    else:
+        print('Temporary files cleaned')
+        os.remove(tmp_file_path)
 
 
 def get_new_file_name(employee_name: str, file_date: datetime.datetime):
@@ -28,7 +28,7 @@ def update_spreadsheet(template_file_path: str, employee_name: str) -> str:
     # open template spreadsheet
     wb = openpyxl.load_workbook(template_file_path)
     sheet = wb['Sheet1']
-    
+
     # update timesheet: employee
     sheet['B3'].value = employee_name
 
