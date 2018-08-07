@@ -7,6 +7,7 @@ name = "pypi"
 openpyxl = "*"
 "flake8-docstrings" = "*"
 "flake8-per-file-ignores" = "*"
+click = "*"
 
 [dev-packages]
 pytest = "*"
