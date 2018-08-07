@@ -9,7 +9,10 @@ CONFIG_PATH = "./.config"
 
 
 @click.command()
-def sit():  # noqa  TODO
+@click.option('--verbose', is_flag=True, default=False)  # TODO: implement verbose logging
+@click.option('--config', type=click.Path(exists=True))  # TODO: find a way to default to home (cross-os)
+def sit(verbose, config):  # noqa  TODO
+    """Create and send the SI timesheet by email."""
     config = get_config(CONFIG_PATH)
     template_file_path = config["xlsx_template_path"]
     employee_name = config["employee_name"]
