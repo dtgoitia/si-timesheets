@@ -1,30 +1,41 @@
-import unittest
-from datetime import datetime
+import datetime
+import pytest
+from sit.friday import get_previous_friday
 
-class TestpreviousFriday(unittest.TestCase):
-  expected_prior_week = datetime(2018, 3, 16)
-  expected_this_week  = datetime(2018, 3, 23)
 
-  def test_monday(self):
-    self.assertEqual(self.expected_prior_week, previousFriday(datetime(2018, 3, 19)))
-  
-  def test_tuesday(self):
-    self.assertEqual(self.expected_prior_week, previousFriday(datetime(2018, 3, 20)))
-  
-  def test_wednesday(self):
-    self.assertEqual(self.expected_prior_week, previousFriday(datetime(2018, 3, 21)))
-  
-  def test_thursday(self):
-    self.assertEqual(self.expected_prior_week, previousFriday(datetime(2018, 3, 22)))
-  
-  def test_friday(self):
-    self.assertEqual(self.expected_this_week, previousFriday(datetime(2018, 3, 23)))
-  
-  def test_saturday(self):
-    self.assertEqual(self.expected_this_week, previousFriday(datetime(2018, 3, 24)))
-  
-  def test_sunday(self):
-    self.assertEqual(self.expected_this_week, previousFriday(datetime(2018, 3, 25)))
+@pytest.fixture
+def expected_prior_week():
+    return datetime.datetime(2018, 3, 16)
 
-unittest.main()
 
+@pytest.fixture
+def expected_this_week():
+    return datetime.datetime(2018, 3, 23)
+
+
+def test_monday(expected_prior_week):
+    assert expected_prior_week, get_previous_friday(datetime.datetime(2018, 3, 19))
+
+
+def test_tuesday(expected_prior_week):
+    assert expected_prior_week, get_previous_friday(datetime.datetime(2018, 3, 20))
+  
+
+def test_wednesday(expected_prior_week):
+    assert expected_prior_week, get_previous_friday(datetime.datetime(2018, 3, 21))
+  
+
+def test_thursday(expected_prior_week):
+    assert expected_prior_week, get_previous_friday(datetime.datetime(2018, 3, 22))
+  
+
+def test_friday(expected_this_week):
+    assert expected_this_week, get_previous_friday(datetime.datetime(2018, 3, 23))
+  
+
+def test_saturday(expected_this_week):
+    assert expected_this_week, get_previous_friday(datetime.datetime(2018, 3, 24))
+  
+  
+def test_sunday(expected_this_week):
+    assert expected_this_week, get_previous_friday(datetime.datetime(2018, 3, 25))

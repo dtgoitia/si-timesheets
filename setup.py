@@ -10,18 +10,16 @@ setup(
     url='https://github.com/dtgoitia/si-timesheets',
     author='David Torralba Goitia',
     author_email='david.torralba.goitia@gmail.com',
-    packages=find_packages(),
+    packages=find_packages(exclude=['tests']),
+    license='MIT',
     python_requires='>=3.6',
     include_package_data=True,
     zip_safe=False,
     keywords=['timesheets'],
+    install_requires=['openpyxl'],
     entry_points={
         'console_scripts': [
             'sit=sit.__main__:main'
         ]
-    },
-    install_requires=[
-        'openpyxl',
-        # 'click',
-    ]
+    }
 )
