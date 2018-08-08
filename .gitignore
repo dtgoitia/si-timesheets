@@ -1,5 +1,9 @@
-.vscode
+# Sensitive data
 .config
-__pycache__
-dist
-build
+
+# Python
+__pycache__/
+dist/
+build/
+.mypy_cache/
+.pytest_cache/
