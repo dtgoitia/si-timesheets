@@ -25,7 +25,7 @@ def delete_temp_files(do_it: str, tmp_file_path: str):
 
 
 # TODO: add unit test
-def update_spreadsheet(template_file_path: str, employee_name: str) -> str:
+def update_spreadsheet(template_file_path: str, employee_name: str, week_status: tuple) -> str:
     """Edit the spreadsheet and save it as a new file."""
     # open the timesheet template spreadsheet
     wb = openpyxl.load_workbook(template_file_path)
@@ -37,6 +37,15 @@ def update_spreadsheet(template_file_path: str, employee_name: str) -> str:
     # update week date in the timesheet
     last_friday = get_previous_friday(datetime.date.today())
     sheet['B4'].value = last_friday.strftime("%d/%m/%Y")
+
+    # update working hours
+    week_columns = ('E', 'F', 'G', 'H', 'I')
+    default_row = 46
+    nondefault_row_reference = 7
+    for status, column in zip(week_status, week_columns):
+        cell = column
+        cell += str(default_row) if status[1] == 0 else str(nondefault_row_reference + status[1])
+        sheet[cell].value = 7.5
 
     # save timesheet as a new file
     new_file_path = create_new_file_path(template_file_path, employee_name, last_friday)
