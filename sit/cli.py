@@ -54,6 +54,62 @@ def prompt_week_status() -> List[Tuple[str, int]]:
     return [prompt_user_per_weekday(day, validate_day_status) for day in working_days]
 
 
+def replace_choices(choice: int) -> str:
+    """Return the user friendly string corresponding to the user choice."""
+    all_choices = {
+        0: 'work',
+        1: 'training',
+        2: 'general adminstration',
+        3: 'company event',
+        4: 'holidays',
+        5: 'sickness',
+        6: 'other absence',
+    }
+    return all_choices[choice]
+
+
+def longest_word(words: List[str]) -> str:
+    """Return longest word in the list."""
+    result = ''
+    for word in words:
+        if len(word) > len(result):
+            result = word
+    return result
+
+
+def add_spaces(word: str, length: int) -> str:
+    """Add spaces to 'word' until it reaches the desired 'length'."""
+    if len(word) > length:
+        raise Exception(f"'{word}' has more than {length} characters")
+    return word + (' ' * (length - len(word)))
+
+
+def print_summary(week_status: List[Tuple[str, int]]) -> None:
+    """Print a formatted table with the choices of the user."""
+    weekdays = [day_status[0] for day_status in week_status]
+    choices = [replace_choices(day_status[1]) for day_status in week_status]
+    column_length = max(len(longest_word(weekdays)), len(longest_word(choices))) + 1
+    weekdays = [add_spaces(day, column_length) for day in weekdays]
+    choices = [add_spaces(choice, column_length) for choice in choices]
+    print(f"column_length={column_length}")
+    print('')
+    print(f"| {'| '.join(weekdays)}")
+    print(f"| {'| '.join(choices)}")
+    print('')
+
+
+def user_is_happy(updated_week_status: List[Tuple[str, int]]) -> bool:
+    """Return true if the user is happy with its new week status."""
+    print_summary(updated_week_status)
+    # summary = '  '.join([])
+    answer = click.confirm('Are you happy with above?',
+                           default=True,
+                           abort=False,
+                           prompt_suffix='\n',
+                           show_default=True)
+    return answer
+
+
 def confirmation():
     """Ask the user to double check the days worked during the week."""
     answer = click.confirm('Did you work Monday till Friday as usual?',
@@ -64,6 +120,8 @@ def confirmation():
     if answer is True:
         return DEFAULT_WEEK_STATUS
     updated_week_status = prompt_week_status()
+    while not user_is_happy(updated_week_status):
+        updated_week_status = prompt_week_status()
     return updated_week_status
 
 
