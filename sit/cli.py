@@ -2,6 +2,7 @@ import click
 from sit.load import get_config
 from sit.spreadsheet import update_spreadsheet
 from sit.mail import send_mail
+from typing import Callable, List, Optional, Tuple, Union
 
 
 # TODO: move global variables to default argument values for click commands
@@ -15,7 +16,7 @@ DEFAULT_WEEK_STATUS = (
 )
 
 
-def validate_day_status(value: any):
+def validate_day_status(value: Union[str, int]) -> Optional[int]:
     """Ensure the answered day status is in the desired range."""
     validation_error_message = 'please type an integer between 0 and 6 (both included)'
     try:
@@ -27,7 +28,15 @@ def validate_day_status(value: any):
         raise click.BadParameter(validation_error_message)
 
 
-def prompt_week_status() -> tuple:
+# TODO: allow half day off
+def prompt_user_per_weekday(day: str, value_proc: Callable) -> Tuple[str, int]:
+    """Ask user what has it done in a specific day."""
+    answer = click.prompt(f"> {day}", default='0', type=int, value_proc=value_proc)
+    updated_day = (day, int(answer))
+    return updated_day
+
+
+def prompt_week_status() -> List[Tuple[str, int]]:
     """Ask user what has it done in the previous week."""
     print("""
   CHOICES:
@@ -41,14 +50,8 @@ def prompt_week_status() -> tuple:
     - 6: other absence
 
   Using the choices above, specify what have you done each day:\n""")  # noqa W293
-    working_days = (('Monday',), ('Tuesday',), ('Wednesday',), ('Thursday',), ('Friday',))
-    result = ()
-    for i, day in enumerate(working_days):
-        # TODO: allow half day off
-        answer = click.prompt(f"> {day[0]}", default=0, type=int, value_proc=validate_day_status)
-        updated_day = day + (int(answer),)
-        result += (updated_day,)
-    return result
+    working_days = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
+    return [prompt_user_per_weekday(day, validate_day_status) for day in working_days]
 
 
 def confirmation():

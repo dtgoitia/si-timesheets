@@ -35,7 +35,7 @@ def update_spreadsheet(template_file_path: str, employee_name: str, week_status:
     sheet['B3'].value = employee_name
 
     # update week date in the timesheet
-    last_friday = get_previous_friday(datetime.date.today())
+    last_friday = get_previous_friday(datetime.datetime.combine(datetime.date.today(), datetime.datetime.min.time()))
     sheet['B4'].value = last_friday.strftime("%d/%m/%Y")
 
     # update working hours
