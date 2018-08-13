@@ -110,7 +110,7 @@ def user_is_happy(updated_week_status: List[Tuple[str, int]]) -> bool:
     return answer
 
 
-def confirmation():
+def week_status_confirmation():
     """Ask the user to double check the days worked during the week."""
     answer = click.confirm('Did you work Monday till Friday as usual?',
                            default=True,
@@ -125,6 +125,16 @@ def confirmation():
     return updated_week_status
 
 
+def send_email_confirmation(recipient: str) -> bool:
+    """Ask the user to double check the email recipient."""
+    answer = click.confirm(f"Are you sure you want to send the email to {recipient}?",
+                           default=True,
+                           abort=False,
+                           prompt_suffix=' ',
+                           show_default=True)
+    return answer
+
+
 @click.command()
 @click.option('--verbose', is_flag=True, default=False)  # TODO: implement verbose logging
 @click.option('--config', type=click.Path(exists=True))  # TODO: find a way to default to home (cross-os)
@@ -133,13 +143,15 @@ def sit(verbose, config):
     config = get_config(CONFIG_PATH)
     template_file_path = config["xlsx_template_path"]
     employee_name = config["employee_name"]
-    week_status = confirmation()
+    week_status = week_status_confirmation()
     new_spreadsheet_path = update_spreadsheet(template_file_path, employee_name, week_status)
     assert new_spreadsheet_path is not None
+    confirm_before_send = send_email_confirmation(config['email_to'])
     send_mail(config['microsoft_account_email'],
               config['microsoft_account_pass'],
               config['email_subject'],
               config['email_body'],
               config['email_to'],
               new_spreadsheet_path,
-              config['delete_temp'])
+              config['delete_temp'],
+              confirm_before_send)
