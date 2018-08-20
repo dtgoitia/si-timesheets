@@ -4,18 +4,18 @@ verify_ssl = true
 name = "pypi"
 
 [packages]
-openpyxl = "*"
-"flake8-docstrings" = "*"
-"flake8-per-file-ignores" = "*"
 click = "*"
+openpyxl = "*"
 
 [dev-packages]
-pytest = "*"
+"autopep8" = "*"
+"flake8-docstrings" = "*"
+"flake8-per-file-ignores" = "*"
 "flake8" = "*"
+mypy = "*"
+pytest = "*"
 pyinstaller = "*"
 rope = "*"
-"autopep8" = "*"
-mypy = "*"
 
 [requires]
-python_version = "3.6"
+python_version = "3.7"
