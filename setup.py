@@ -12,11 +12,11 @@ setup(
     author_email='david.torralba.goitia@gmail.com',
     packages=find_packages(exclude=['tests']),
     license='MIT',
-    python_requires='>=3.6',
+    python_requires='>=3.7',
     include_package_data=True,
     zip_safe=False,
     keywords=['timesheets'],
-    install_requires=['openpyxl'],
+    install_requires=['click', 'openpyxl'],
     entry_points={
         'console_scripts': [
             'sit=sit.__main__:main'
