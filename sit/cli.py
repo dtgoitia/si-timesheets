@@ -6,7 +6,6 @@ from typing import Callable, List, Optional, Tuple, Union
 
 
 # TODO: move global variables to default argument values for click commands
-CONFIG_PATH = "./.config"
 DEFAULT_WEEK_STATUS = (
     ('Monday', 0),
     ('Tuesday', 0),
@@ -137,10 +136,10 @@ def send_email_confirmation(recipient: str) -> bool:
 
 @click.command()
 @click.option('--verbose', is_flag=True, default=False)  # TODO: implement verbose logging
-@click.option('--config', type=click.Path(exists=True))  # TODO: find a way to default to home (cross-os)
+@click.option('--config', type=click.Path(exists=True))
 def sit(verbose, config):
     """Create and send the SI timesheet by email."""
-    config = get_config(CONFIG_PATH)
+    config = get_config()
     template_file_path = config["xlsx_template_path"]
     employee_name = config["employee_name"]
     week_status = week_status_confirmation()
