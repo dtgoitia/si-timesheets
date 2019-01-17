@@ -2,25 +2,17 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from setuptools import find_packages, setup
+import json
 
+with open('Pipfile.lock') as fd:
+    lock_data = json.load(fd)
 
-def get_packages_from_pipfile():
-    """Return package names from Pipfile."""
-    with open('Pipfile', 'r') as f:
-        content = f.read()
-    packages = []
-    extract_line = False
-    for line in content.split('\n'):
-        if line == '[packages]':
-            extract_line = True
-            continue
-        if line == '':
-            extract_line = False
-            continue
-        if extract_line:
-            package_name = line.split(' ')[0]
-            packages.append(package_name)
-    return packages
+    install_requires = []
+    for package_name, package_data in lock_data['default'].items():
+        if 'version' not in package_data:
+            raise ValueError(f'Package {package_name} does '
+                             f'not have version key: {package_data}')
+        install_requires.append(package_name + package_data['version'])
 
 
 setup(
@@ -36,7 +28,7 @@ setup(
     include_package_data=True,
     zip_safe=False,
     keywords=['timesheets'],
-    install_requires=get_packages_from_pipfile(),
+    install_requires=install_requires,
     entry_points={
         'console_scripts': [
             'sit=sit.__main__:main'
