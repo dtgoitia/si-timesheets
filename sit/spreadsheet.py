@@ -40,7 +40,7 @@ def update_spreadsheet(template_file_path: str, employee_name: str, week_status:
 
     # update working hours
     week_columns = ('E', 'F', 'G', 'H', 'I')
-    default_row = 46
+    default_row = 47
     nondefault_row_reference = 6
     for status, column in zip(week_status, week_columns):
         cell = column

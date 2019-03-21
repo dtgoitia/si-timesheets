@@ -41,12 +41,13 @@ def prompt_week_status() -> List[Tuple[str, int]]:
   CHOICES:
 
     - 0: working all day (default)
-    - 1: training
-    - 2: general adminstration
-    - 3: company event
-    - 4: holidays
-    - 5: sickness
-    - 6: other absence
+    - 1: research & development
+    - 2: training
+    - 3: general adminstration
+    - 4: company event
+    - 5: holidays
+    - 6: sickness
+    - 7: other absence
 
   Using the choices above, specify what have you done each day:\n""")  # noqa W293
     working_days = ('Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday')
@@ -57,12 +58,13 @@ def replace_choices(choice: int) -> str:
     """Return the user friendly string corresponding to the user choice."""
     all_choices = {
         0: 'work',
-        1: 'training',
-        2: 'general adminstration',
-        3: 'company event',
-        4: 'holidays',
-        5: 'sickness',
-        6: 'other absence',
+        1: 'research & development',
+        2: 'training',
+        3: 'general adminstration',
+        4: 'company event',
+        5: 'holidays',
+        6: 'sickness',
+        7: 'other absence',
     }
     return all_choices[choice]
 
